@@ -21,8 +21,8 @@ public interface MethodCallAPI {
 
 
     //use List as call type since we are expecting to get back a json array
-    //hardcode in patientId: 1
-    @GET("api/list/1")
+    //hardcode in patientId: P1
+    @GET("api/list/P1")
     Call<List<Appointment>> getAppointments();
 
 
@@ -32,7 +32,7 @@ public interface MethodCallAPI {
 
 
     //get patient name to display on top right of activity (done: 11/8/2021)
-    //hardcode in patientId: 1
-    @GET("api/patient/1")
+    //hardcode in patientId: P1
+    @GET("api/patient/P1")
     Call<Patient> getPatients();
 }

@@ -63,12 +63,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), PatientMCActivity.class);
-                intent.putExtra("mcId", appointmentList.get(position).getMc().getMcId());
-                String dateFrom_Formatted = sdf.format(appointmentList.get(position).getMc().getDateFrom());
-                intent.putExtra("mcDateFrom", dateFrom_Formatted);
-                String dateTo_Formatted = sdf.format(appointmentList.get(position).getMc().getDateTo());
-                intent.putExtra("mcDateTo", dateTo_Formatted);
-                intent.putExtra("mcDuration", appointmentList.get(position).getMc().getDuration());
+                if (appointmentList.get(position).getMc() != null) {
+                    intent.putExtra("mcId", appointmentList.get(position).getMc().getMcId());
+                    String dateFrom_Formatted = sdf.format(appointmentList.get(position).getMc().getDateFrom());
+                    intent.putExtra("mcDateFrom", dateFrom_Formatted);
+                    String dateTo_Formatted = sdf.format(appointmentList.get(position).getMc().getDateTo());
+                    intent.putExtra("mcDateTo", dateTo_Formatted);
+                    intent.putExtra("mcDuration", appointmentList.get(position).getMc().getDuration());
+                }
                 v.getContext().startActivity(intent);
             }
         });

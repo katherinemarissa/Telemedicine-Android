@@ -24,6 +24,8 @@ import org.json.JSONObject;
 import java.io.Console;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,8 +119,25 @@ public class PatientConsultationHistoryActivity extends AppCompatActivity {
 
                 //trying method 2 (11/8/2021)
                 appointmentList = response.body();
+
+                //sort by date (most recent till earliest date) before putting into recyclerview (12/8/2021)
+                Collections.sort(appointmentList, Collections.reverseOrder(new Comparator<Appointment>() {
+                    @Override
+                    public int compare(Appointment o1, Appointment o2) {
+                        if (o1.getAppointmentDate() == null || o2.getAppointmentDate() == null)
+                            return 0;
+                        return o1.getAppointmentDate().compareTo(o2.getAppointmentDate());
+                    }
+
+                    @Override
+                    public boolean equals(Object obj) {
+                        return false;
+                    }
+                }));
+
+                //put appointmentList items into recyclerview and notifyDataSetChanged()
                 for (int i = 0; i < appointmentList.size(); i++) {
-                    myAdapter = new MyAdapter(getApplicationContext(), appointmentList); //PatientConsultationHistoryActivity.this
+                    myAdapter = new MyAdapter(getApplicationContext(), appointmentList);
                     recyclerView.setAdapter(myAdapter);
                     myAdapter.notifyDataSetChanged();
                 }

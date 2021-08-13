@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,18 +42,30 @@ public class PatientMCActivity extends AppCompatActivity {
         TextView mcDateFrom = findViewById(R.id.dateFrom);
         TextView mcDateTo = findViewById(R.id.dateTo);
         TextView mcDuration = findViewById(R.id.duration);
+        TableLayout table = findViewById(R.id.table);
+        TextView noMC = findViewById(R.id.noMC);
+
+        noMC.setVisibility(View.INVISIBLE);
 
         if (mcId != null)
-            mcId.setText(id);
+            if (id != null)
+                mcId.setText(id);
+            else {
+                table.setVisibility(View.INVISIBLE);
+                noMC.setVisibility(View.VISIBLE);
+            }
 
         if (mcDateFrom != null)
-            mcDateFrom.setText(dateFrom);
+            if (dateFrom != null)
+                mcDateFrom.setText(dateFrom);
 
         if (mcDateTo != null)
-            mcDateTo.setText(dateTo);
+            if (dateTo != null)
+                mcDateTo.setText(dateTo);
 
         if (mcDuration != null)
-            mcDuration.setText(String.valueOf(duration) + " day(s)");
+            if (duration != 0)
+                mcDuration.setText(String.valueOf(duration) + " day(s)");
 
         //set up Back button for activity
         setupBackBtn();

@@ -47,25 +47,23 @@ public class PatientMCActivity extends AppCompatActivity {
 
         noMC.setVisibility(View.INVISIBLE);
 
-        if (mcId != null)
-            if (id != null)
+        if (id != null) {
+            if (mcId != null)
                 mcId.setText(id);
-            else {
-                table.setVisibility(View.INVISIBLE);
-                noMC.setVisibility(View.VISIBLE);
-            }
 
-        if (mcDateFrom != null)
-            if (dateFrom != null)
-                mcDateFrom.setText(dateFrom);
+            if (mcDateFrom != null && dateFrom != null)
+                    mcDateFrom.setText(dateFrom);
 
-        if (mcDateTo != null)
-            if (dateTo != null)
-                mcDateTo.setText(dateTo);
+            if (mcDateTo != null && dateTo != null)
+                    mcDateTo.setText(dateTo);
 
-        if (mcDuration != null)
-            if (duration != 0)
-                mcDuration.setText(String.valueOf(duration) + " day(s)");
+            if (mcDuration != null && duration != 0)
+                    mcDuration.setText(String.valueOf(duration) + " day(s)");
+        }
+        else {
+            table.setVisibility(View.INVISIBLE);
+            noMC.setVisibility(View.VISIBLE);
+        }
 
         //set up Back button for activity
         setupBackBtn();
